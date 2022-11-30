@@ -1,28 +1,36 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, json, jsonify, request
+from api.post.service import read_all_user
 from config.db import db
 from .models.user import User
-user_api = Blueprint(
-  'user',
-  __name__
-)
+from .service import create_user
+from flask_api import status
 
-@user_api.route('', methods=['POST'])
+user_api = Blueprint("user", __name__)
+
+@user_api.route("", methods=["POST"])
 def post_create():
-  req = request.get_json(force=True)
-  user = User(
-    username=req["username"],
-    password_salt=req["password_salt"],
-    email=req["email"],
-    id=req["id"]
-  )
-  db.session.add(user)
-  db.session.commit()
+    req = request.get_json()
 
-  return jsonify(
-    success=True 
-  ), 200, {"Content-Type": "application/json"}
+    if not req:
+        return (
+          "Invalid request!",
+          status.HTTP_400_BAD_REQUEST
+        )
 
-@user_api.route('', methods=['GET'])
-def get_read():
-  return 'login POST'
+    user = create_user(
+        req["username"],
+        req["password_salt"],
+        req["password_hash"],
+        req["email"],
+        req["id"],
+    )
 
+    return (
+        jsonify(success=True, data=user.serialize()),
+        status.HTTP_200_OK,
+        {"Content-Type": "application/json"},
+    )
+
+@user_api.route("", methods=["GET"])
+def get_read() -> list[User]:
+    return read_all_user()
