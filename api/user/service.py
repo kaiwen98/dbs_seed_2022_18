@@ -19,6 +19,6 @@ def create_user(
 def read_one_user(
     **kwargs
 ) -> User:
-    return User.query.filter(
+    return User.query.filter_by(
         **kwargs
     ).first()

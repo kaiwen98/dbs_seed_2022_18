@@ -15,3 +15,9 @@ class User(db.Model):
 
     def serialize(self):
         return Serializer.serialize(self)
+
+    def serialize_public(self):
+        temp = Serializer.serialize(self)
+        del temp["password_hash"]
+        del temp["password_salt"]
+        return temp
