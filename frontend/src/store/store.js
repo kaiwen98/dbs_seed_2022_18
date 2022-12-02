@@ -1,6 +1,7 @@
-import {configureStore} from '@redusjs/toolkit'
+import {configureStore} from '@reduxjs/toolkit'
+import sampleReducer from './reducers/sampleSlice'
 export default configureStore({
   reducer: {
-
+    SAMPLE_TYPE: sampleReducer 
   }
 })
