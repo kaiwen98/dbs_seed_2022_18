@@ -6,13 +6,20 @@ import uuid
 from flask_api import status
 import json
 from api.auth.service import auth
+from json import dumps as jsonstring
 
 auth_api = Blueprint("auth", __name__)
 
 @auth_api.route("/login", methods=["POST"])
-@auth.login_required
+# @auth.login_required
 def get_login():
-    return auth.current_user()
+    payload = request.json
+    user = auth_service.get_user(payload['username'])
+    if user.username == payload['password']:
+        return jsonify({"code": "200", "message": {"userid":user.UserID, "username":user.username}})
+    else:
+        return jsonify({"code": "400", "message": "Login failed"})
+        
 
 @auth_api.route("/register", methods=["POST"])
 def post_register():
