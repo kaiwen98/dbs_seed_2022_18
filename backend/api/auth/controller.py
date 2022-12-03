@@ -15,10 +15,12 @@ auth_api = Blueprint("auth", __name__)
 def get_login():
     payload = request.json
     user = auth_service.get_user(payload['username'])
-    if user!=None and user.password == payload['password']:
+    if user==None:
+        return jsonify({"code": "400", "message": "User not found"})
+    elif user.password == payload['password']:
         return jsonify({"code": "200", "message": {"userid":user.userID, "username":user.username}})
     else:
-        return jsonify({"code": "400", "message": "Login failed"})
+        return jsonify({"code": "400", "message": "Invalid password"})
         
 
 @auth_api.route("/register", methods=["POST"])
