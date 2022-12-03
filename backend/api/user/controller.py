@@ -1,5 +1,5 @@
 from flask import Blueprint, json, jsonify, request
-from api.user.service import read_all_user, update_user
+from api.user.service import read_one_user, read_all_user
 from config.db import db
 from .models.user import User
 from .service import create_user
@@ -60,3 +60,9 @@ def update_user():
         status.HTTP_200_OK,
         {"Content-Type": "application/json"},
     )
+
+@user_api.route("/updateUserPassword", methods=["PATCH"])
+def update_user_password():
+    req = request.get_json()
+    tes = read_all_user(username="SeederDBS")
+    print(req)
