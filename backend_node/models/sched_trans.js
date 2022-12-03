@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const sched_trans = sequelize.define("sched_trans", {
-        id: {
+        transactionId: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
