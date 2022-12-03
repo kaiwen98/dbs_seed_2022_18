@@ -9,7 +9,7 @@ function App() {
         <Route path="/home" element={<Homepage></Homepage>}></Route>
         <Route
           path="/newTrans"
-          element={<NewTransactions></NewTransactions>}
+          element={<NewTransactions/>}
         ></Route>
       </Routes>
     </>
