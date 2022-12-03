@@ -5,13 +5,13 @@ from config.db import db
 
 class User(db.Model):
     __tablename__ ="User"
-    UserID = db.Column(db.String(80), primary_key=True)
-    Username = db.Column(db.String(80), unique=True, nullable=False)
-    Password = db.Column(db.String(80))
-    FirstName = db.Column(db.String(80))
-    LastName = db.Column(db.String(80))
-    Email = db.Column(db.String(80), unique=True, nullable=False)
-    Address = db.Column(db.String(80))
+    userID = db.Column(db.String(80), primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(80))
+    firstName = db.Column(db.String(80))
+    lastName = db.Column(db.String(80))
+    email = db.Column(db.String(80), unique=True, nullable=False)
+    address = db.Column(db.String(80))
 
 
     def __repr__(self):

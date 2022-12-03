@@ -36,7 +36,7 @@ def get_read() -> list[User]:
     print("GET")
     return read_all_user()
 
-
+    
 @user_api.route("/updateUser", methods=["PATCH"])
 def update_user():
     req = request.get_json()
@@ -57,7 +57,7 @@ def update_user():
     )
 
     return (
-        jsonify(success=True, data=user.serialize()),
+        jsonify(success=True, data=user),
         status.HTTP_200_OK,
         {"Content-Type": "application/json"},
     )
