@@ -27,22 +27,10 @@ def create_user(
 #         **kwargs
 #     ).all()
 
-def read_one_user(
-
-    userID: str 
-) -> User:
-    user = User.query.filter_by(userID = userID)
-    res = list(map(
-        lambda u: u.serialize(),
-        user
-    ))
-
-    db.session.commit()
 def read_one_user(userID):
     res =  User.query.filter_by(userID=userID).first()
     return res
 
-    return res
 
 def read_all_user(
     **kwargs
@@ -68,21 +56,27 @@ def read_all_user(
 
 def update_users(
 
-   Username: str, FirstName: str, LastName: str, Email: str, Address: str, UserID: str
+   username: str, firstName: str, lastName: str, email: str, address: str, userID: str
 ) -> User:
-    user = User.query.filter_by(UserID = User.UserID)
+    user = User.query.filter_by(userID = userID)
 
     user.update({
-        "Username":Username ,
-        "FirstName":FirstName,
-        "LastName":LastName,
-        "Email":Email,
-        "Address":Address,
+        "username":username ,
+        "firstName":firstName,
+        "lastName":lastName,
+        "email":email,
+        "address":address,
         })
+
+    res = list(map(
+            lambda u: u.serialize(),
+            user
+        ))
 
     db.session.commit()
 
-    return user
+
+    return res
 
 def update_user_password(
 
