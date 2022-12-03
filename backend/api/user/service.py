@@ -78,8 +78,6 @@ def update_user_password(
 
     user.update({"password":password})
 
-    
-
     res = list(map(
         lambda u: u.serialize(),
         user
