@@ -10,14 +10,12 @@ def read_all_user(
 ):
     user = Account.query.all()
 
-    print(user)
 
     res = list(map(
         lambda u: u.serialize(),
         user
     ))
 
-    print(res)
 
     # for i in user:
     #     i['id'] = str(i['id'])

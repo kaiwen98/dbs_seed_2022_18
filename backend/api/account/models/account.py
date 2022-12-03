@@ -12,7 +12,7 @@ class Account(db.Model):
     accountBalance = db.Column(db.String(80))
 
     def __repr__(self):
-        return f"<Account {self.username}>"
+        return f"<Account {self.accountID}>"
 
     def serialize(self):
         return Serializer.serialize(self)
