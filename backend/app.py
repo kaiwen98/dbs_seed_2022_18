@@ -3,6 +3,7 @@ from flask import Flask
 from flask_cors import CORS, cross_origin
 from dotenv import load_dotenv
 import os
+from flask_cors import CORS
 
 from flask_jwt_extended import JWTManager, get_jwt
 from api.auth.controller import auth_api

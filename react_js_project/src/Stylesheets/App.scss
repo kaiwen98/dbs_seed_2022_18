@@ -1,3 +1,29 @@
+$background2: #2C497F;
+
+.app {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  overflow: hidden;
+  background-image: url('../../public/Img/dbs_wallpaper_2.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.app .backgroundColorDiv{
+  opacity: 0.7;
+  background-color: $background2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+
+}
+
 .App {
   text-align: center;
 }
