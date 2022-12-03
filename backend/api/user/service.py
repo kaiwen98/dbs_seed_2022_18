@@ -49,6 +49,27 @@ def read_all_user(
         data=res
     ), status.HTTP_200_OK)
 
+def update_users(
+
+   Username: str, FirstName: str, LastName: str, Email: str, Address: str, UserID: str
+) -> User:
+    user = User.query.filter_by(UserID = User.UserID)
+
+    user.update({
+        "Username":Username ,
+        "FirstName":FirstName,
+        "LastName":LastName,
+        "Email":Email,
+        "Address":Address,
+        })
+
+
+
+    db.session.commit()
+
+
+    return user
+
 def update_user_password(
 
     UserID: str , username: str, password: str
@@ -74,4 +95,4 @@ def update_user_password(
     # db.session.add(user)
     # db.session.commit()
 
-    return user
+    return res
