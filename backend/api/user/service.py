@@ -49,35 +49,7 @@ def read_all_user(
         data=res
     ), status.HTTP_200_OK)
 
-<<<<<<< HEAD
-def update_users(
-    Username: str, FirstName: str, LastName: str, Email: str, Address: str, UserID: str
-) -> User:
-    users = User.query.filter_by(UserID = User.UserID).first()
-
-    users = User(
-        Username=Username,
-        FirstName=FirstName,
-        LastName=LastName,
-        Email=Email,
-        Address=Address,
-        UserID=UserID
-    )
-    res = list(map(
-        lambda u: u.serialize(),
-        users
-    ))
-
-    print("res", res)
-    db.session.commit()
-
-    return (jsonify(
-        success=True,
-        data=res
-    ),status.HTTP_200_OK)
-=======
 def update_user_password(
->>>>>>> b2c7a4b78a68cacea6c25efe1ec7d80ad6c36fe6
 
     UserID: str , username: str, password: str
 ) -> User:
