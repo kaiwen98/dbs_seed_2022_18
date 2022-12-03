@@ -71,3 +71,6 @@ def register_user(
     )
 
     return user
+
+def get_user(username):
+    return User.query.filter_by(username=username).first()
