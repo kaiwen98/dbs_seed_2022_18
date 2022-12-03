@@ -24,6 +24,7 @@ def read_one_user(userID):
     res =  User.query.filter_by(userID=userID).first()
     return res
 
+
 def read_all_user(
     **kwargs
 ) -> User:
@@ -51,6 +52,7 @@ def update_users(
    Username: str, FirstName: str, LastName: str, Email: str, Address: str, UserID: str
 ) -> User:
     user = User.query.filter_by(UserID = User.UserID)
+
 
     user.update({
         "Username":Username ,
@@ -82,8 +84,30 @@ def update_user_password(
 
     db.session.commit()
 
+
+    return res
+
+def update_user_password(
+
+    UserID: str , username: str, password: str
+) -> User:
+    user = User.query.filter_by(UserID = 1).all()
+
+    res = list(map(
+        lambda u: u.serialize(),
+        user
+    ))
+
+    print(res)
+
+    db.session.commit()
+
     # user = User(
-        # passwoord 
+    #     username=username,
+    #     password_salt=password_salt,
+    #     password_hash=password_hash,
+    #     email=email,
+    #     id=id,
     # )
     # db.session.add(user)
     # db.session.commit()
