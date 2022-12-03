@@ -1,5 +1,5 @@
 from flask import Blueprint, json, jsonify, request
-from api.user.service import read_all_user, read_one_user, update_user_password
+from api.user.service import read_all_user, read_one_user, update_user_password, update_users
 from config.db import db
 from .models.user import User
 from .service import create_user
@@ -47,12 +47,12 @@ def update_user():
         )
 
     user = update_users(
-        req["Username"],
-        req["FirstName"],
-        req["LastName"],
-        req["Email"],
-        req["Address"],
-        req["UserID"]
+        req["username"],
+        req["firstName"],
+        req["lastName"],
+        req["email"],
+        req["address"],
+        req["userID"]
     )
 
     return (
