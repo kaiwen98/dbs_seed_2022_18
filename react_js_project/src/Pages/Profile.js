@@ -25,6 +25,8 @@ const Profile = (props) => {
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const navigate = useNavigate();
+    const [userDetails, setUserDetails] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const checkIfUserIsLoggedIn =()=>{
         let tempLoggedInUserId = localStorage.getItem("loggedInUserID");
@@ -48,12 +50,31 @@ const Profile = (props) => {
             let tempLoggedInUserId = localStorage.getItem("loggedInUserID");
             console.log(tempLoggedInUserId);
             const res = await Api.get(`/user/${tempLoggedInUserId}`); // data automatically converted to json format
+            if(res.data){
+                setUserDetails(res.data);
+                setLoading(true);
+            }
             console.log(res);
             console.log("TEST");
         }
 
         setUpProfilePage();
-    })
+    },[])
+
+    const updateEmailBackend=async()=>{
+        let obj = {'username':userDetails.username,'firstName':userDetails.firstName,'lastName':userDetails.lastName ,'email':email, 'address':address,'userID':userDetails.userID}
+        const res = await Api.patch(`/user/updateUser`,obj); // data automatically converted to json format
+        console.log(res);
+        userDetails.email = email;
+        console.log(userDetails);
+        setUserDetails(userDetails);
+    }
+
+    const updateAddressBackend=async()=>{
+        let obj = {'username':userDetails.username,'firstName':userDetails.firstName,'lastName':userDetails.lastName ,'email':email, 'address':address,'userID':userDetails.userID}
+        const res = await Api.patch(`/user/updateUser`,obj); // data automatically converted to json format
+        console.log(res);
+    }
 
     const buttonHandler = (type) => {
         switch(type) {
@@ -77,6 +98,7 @@ const Profile = (props) => {
     const saveEmail = () => {
         console.log(email)
         setModalType(false);
+        updateEmailBackend();
     }
 
     const emailHandler = (e) => {
@@ -86,13 +108,17 @@ const Profile = (props) => {
     const saveAddress = () => {
         console.log(address)
         setModalType(false);
+        updateAddressBackend();
     }
 
     const addressHandler = (e) => {
         setAddress(e.target.value)
+
     }
 
-    return (
+    return !userDetails ? (
+        <h3>Loading ...</h3>
+    ) : (
         <React.Fragment>
             <Modal show={modalType==="Email"} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -158,29 +184,30 @@ const Profile = (props) => {
                     <div className="form-block__input-wrapper">
                         <div className="form-group form-group--login">
                             <br />
+                            
                             <div className="profile-inner-container">
-                                <h6>Username:</h6>
+                                <h6>Username:  {userDetails.username}</h6>
                             </div>
                             <br />
                             <br />
                             <div className="profile-inner-container">
-                                <h6>Email address:</h6>
+                                <h6>Email address: {userDetails.email}</h6>
                                 <button className="profile-button" onClick={(e) => buttonHandler("Email")}>Edit Email </button>
                             </div>
                             <br />
                             <br />
                             <div className="profile-inner-container">
-                                <h6>First Name:</h6>
+                                <h6>First Name: {userDetails.firstName}</h6>
                             </div>
                             <br />
                             <br />
                             <div className="profile-inner-container">
-                                <h6>Last Name:</h6>
+                                <h6>Last Name: {userDetails.lastName}</h6>
                             </div>
                             <br />
                             <br />
                             <div className="profile-inner-container">
-                                <h6>Address:</h6>
+                                <h6>Address: {userDetails.address}</h6>
                                 <button className="profile-button" onClick={(e) => buttonHandler("Address")}>Edit Address </button>
                             </div>
                         </div>
