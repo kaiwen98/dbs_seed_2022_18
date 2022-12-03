@@ -5,16 +5,16 @@ from flask_api import status
 
 
 def create_user(
-    username: str, firstname: str, lastname: str, email:str, address:str, password: str, id: str
+    username: str, firstname: str, lastname: str, email:str, address:str, password: str, user_id: str
 ) -> User:
     user = User(
-        Username=username,
-        Firstname=firstname,
-        Lastname=lastname,
-        Password=password,
-        Email=email,
-        Address=address,
-        UserID=id,
+        username=username,
+        firstname=firstname,
+        lastname=lastname,
+        password=password,
+        email=email,
+        address=address,
+        user_id=user_id,
     )
     db.session.add(user)
     db.session.commit()

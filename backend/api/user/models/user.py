@@ -4,13 +4,13 @@ from config.db import db
 
 
 class User(db.Model):
-    UserID = db.Column(db.String(80), primary_key=True)
-    Username = db.Column(db.String(80), unique=True, nullable=False)
-    Password = db.Column(db.String(80))
-    Firstname = db.Column(db.String(80))
-    Lastname = db.Column(db.String(80))
-    Email = db.Column(db.String(80), unique=True, nullable=False)
-    Address = db.Column(db.String(80))
+    user_id = db.Column(db.String(80), primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(80))
+    firstname = db.Column(db.String(80))
+    lastname = db.Column(db.String(80))
+    email = db.Column(db.String(80), unique=True, nullable=False)
+    address = db.Column(db.String(80))
 
 
     def __repr__(self):
