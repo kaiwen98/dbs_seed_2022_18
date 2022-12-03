@@ -1,30 +1,32 @@
-module.exports = (sequelize, DataTypes) => {
-    const sched_trans = sequelize.define("sched_trans", {
-        transactionId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        accountId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        receivingAccountId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        date: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        amount: {
-            type: DataTypes.FLOAT,
-            allowNull: false,
-        },
-        comment: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-    });
+import {Schema, model} from "../db/connection.js";
 
-    return sched_trans;
-};
+const transSchema = new Schema( {
+    transactionId: {
+        type: Number,
+        required: true,
+    },
+    accountId: {
+        type: Number,
+        required: true,
+    },
+    receivingAccountId: {
+        type: Number,
+        required: true,
+    },
+    date: {
+        type: String,
+        required: true,
+    },
+    amount: {
+        type: Number,
+        required: true,
+    },
+    comment: {
+        type: Number,
+        required: true,
+    },
+})
+
+const trans = model("Trans", transSchema)
+
+module.export = trans;

@@ -1,4 +1,5 @@
 import mysql from 'mysql';
+import {} from 'dotenv/config'; 
 
 const connection = mysql.createConnection({
     host     : process.env.DB_HOST,
@@ -16,7 +17,5 @@ const connection = mysql.createConnection({
     console.log('connected to db');
   });
   
-  // connection.end();
+connection.end();
 
-
-module.exports = mysql;

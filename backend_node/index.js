@@ -1,37 +1,17 @@
 import express from "express";
 import cors from "cors";
 import transRouter from "./routes/sched_trans.js";
-import mysql from 'mysql';
-
+// import trans from "../models/sched_trans";
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-// db connections
-const connection = mysql.createConnection({
-    host     : process.env.DB_HOST,
-    user     : process.env.DB_USER,
-    password : process.env.DB_PASSWORD,
-    port     : process.env.PORT
-  });
-  
-  connection.connect(function(err) {
-    if (err) {
-      console.log(connection);
-      console.log('db connection failed ' + err.stack);
-      return;
-    }
-    console.log('connected to db');
-  });
-  
-connection.end();
 
 // Routers
-app.get("/", (req, res) => {app.get("/", (req, res) => {
-  res.send("this is the test route to make sure server is working")
-  })
+app.get("/", (req, res) => {
+   console.log("testing everything here")
 })
 
 app.use("/sched_trans", transRouter);
