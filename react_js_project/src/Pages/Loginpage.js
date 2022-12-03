@@ -52,7 +52,7 @@ const LoginPage = (props) => {
                 let loginStatus = await loginFunction(username,password);
                 console.log("LOGIN OBJ");
                 console.log(loginStatus);
-                if(loginStatus.code === 400){
+                if(loginStatus.data.code === 400){
                     setAlertErrorMsg("Failed to login no such user exist");
                     console.log(localStorage);
                     return setShowAlert(true);
@@ -62,8 +62,8 @@ const LoginPage = (props) => {
                     console.log("User successfully logged in");
 
                     //Login user into session
-                    localStorage.setItem("loggedInUserID",loginStatus.message.id);
-                    localStorage.setItem("loggedInUserName",loginStatus.message.username);
+                    localStorage.setItem("loggedInUserID",loginStatus.data.userid);
+                    localStorage.setItem("loggedInUserName",loginStatus.data.username);
                     console.log(localStorage);
                     return navigate('/home');
                 }
@@ -86,18 +86,18 @@ const LoginPage = (props) => {
         const validateLoginFunction = async (username,password) => {
         try{
             let obj = {'username':username, 'password': password}
-            // const res = await Api.post(`/auth/login`,obj); // data automatically converted to json format
-            const res = {"code":200, "message":"Login fail backend check"};
+            const res = await Api.post(`/auth/login`,obj); // data automatically converted to json format
+            // const res = {"code":200, "message":"Login fail backend check"};
             // const res = {"code":400, "message":{'id':1,"username":"timothy"}};
             console.log("RES");
             console.log(res);
-            if(res.code == 400){
+            if(res.data.code == 400){
                 console.log("Login passed backend check");
-                return {"code":200,"message":res.message};
+                return res;
             }
             else{
                 console.log("Login failed backend check");
-                return {"code":400,"message":res.message};
+                return res;
             }
         } 
             catch (err){
@@ -113,11 +113,11 @@ const LoginPage = (props) => {
         let loginValidation = await validateLoginFunction(username,password);
             if(loginValidation.code === 200){
                 console.log("Managed to successfully login");
-                return {"code":200,"message":loginValidation.message};
+                return loginValidation;
             }
             else{
                 console.log("Failed to login");
-                return {"code":400,"message":loginValidation.message};
+                return loginValidation;
             }
         }
 

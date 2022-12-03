@@ -24,10 +24,6 @@ const Homepage = () => {
           console.log("in setUpPageData");
           await testBackendCall();
         }
-        if(!checkIfUserIsLoggedIn()){
-            console.log("Failed user is login check");
-            return navigate('/login');
-        }
 
         setUpPageData();
       },[])
