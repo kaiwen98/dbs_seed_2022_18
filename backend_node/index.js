@@ -1,11 +1,12 @@
-const express = require("express");
+import express from "express";
+import cors from "cors";
+
 const app = express();
-const cors = require("cors");
 
 app.use(express.json());
 app.use(cors());
 
-const db = require("./models");
+import db from "./models";
 
 // Routers
 const transRouter = require("./routes/sched_trans");
