@@ -67,7 +67,7 @@ def register_user(
         password=password_hash.decode('utf-8'),
         email=email,
         address=address,
-        user_id=id
+        UserID=id
     )
 
     return user

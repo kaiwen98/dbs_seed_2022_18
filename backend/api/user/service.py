@@ -5,7 +5,7 @@ from flask_api import status
 
 
 def create_user(
-    username: str, firstname: str, lastname: str, email:str, address:str, password: str, user_id: str
+    username: str, firstname: str, lastname: str, email:str, address:str, password: str, UserID: str
 ) -> User:
     user = User(
         username=username,
@@ -14,7 +14,7 @@ def create_user(
         password=password,
         email=email,
         address=address,
-        user_id=user_id,
+        UserID=UserID,
     )
     db.session.add(user)
     db.session.commit()

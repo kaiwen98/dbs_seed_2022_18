@@ -4,7 +4,8 @@ from config.db import db
 
 
 class User(db.Model):
-    user_id = db.Column(db.String(80), primary_key=True)
+    __tablename__ ="User"
+    UserID = db.Column(db.String(80), primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(80))
     firstname = db.Column(db.String(80))
