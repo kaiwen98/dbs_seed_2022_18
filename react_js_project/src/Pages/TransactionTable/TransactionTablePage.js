@@ -40,13 +40,9 @@ const TransactionTablePage = ({
   }
 
   useEffect(()=>{
-    console.log("IN USE EFFECT");
     if(!checkIfUserIsLoggedIn()){
         console.log("Failed user is login check");
         return navigate('/login');
-    }
-    else{
-      console.log("help");
     }
   },[])
 
