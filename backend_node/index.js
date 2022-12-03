@@ -10,9 +10,7 @@ app.use(cors());
 
 
 // Routers
-app.get("/", (req, res) => {
-   console.log("testing everything here")
-})
+
 
 app.use("/sched_trans", transRouter);
 

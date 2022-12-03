@@ -1,4 +1,4 @@
-
+import mysql from "../db/connection.js";
 
 let transactions = [];
 export const newTransaction = (req,res) => {
@@ -7,7 +7,15 @@ export const newTransaction = (req,res) => {
     res.send(transaction);
 }
 export const getTransactions = (req, res) => {
-    res.send(transactions);
+    console.log('test get')
+    const transactions = connection.query( 'select * from Bank.ScheduledTransactions', function(error, results){
+        if (results) {
+            res.send(transactions)
+        } else {
+            console.log(error);
+        }
+    })
+    
 }
 
 export const deleteTransaction = (req, res) => {
