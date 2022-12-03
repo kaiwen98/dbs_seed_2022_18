@@ -18,11 +18,11 @@ const DUMMY_DATA = [
 const NewTransactions = (props) => {
 
     const dateFormat = 'YYYY-MM-DD';
-    const [name, setName] = useState("")
     const [accountNumber, setAccountNumber] = useState("")
     const [amount, setAmount] = useState(0)
     const [comment, setComment] = useState("")
-    const [scheduledDate, setScheduledDate] = useState(dayjs().format('YYYYMMDD'))
+    const [scheduledDate, setScheduledDate] = useState(dayjs().format('YYYY-MM-DD'))
+    const [validation, setValidation] = useState(false)
     
     // useEffect(() => {
     //     const sendNewTransaction=async()=>{
@@ -42,10 +42,6 @@ const NewTransactions = (props) => {
     //         console.log(err);
     //     }
     // }
-
-    const nameHandler = (event) => {
-        setName(event.target.value)
-    }
 
     const accountNumberHandler = (event) => {
         setAccountNumber(event.target.value)
@@ -68,19 +64,30 @@ const NewTransactions = (props) => {
         e.preventDefault();
         try{
             console.log("MAKING TEST BACKEND CALL");
-            console.log(name)
             console.log(accountNumber)
             console.log(amount)
             console.log(comment)
             console.log(scheduledDate)
+            let splitScheduledDate = scheduledDate.split("-")
+            let isoTimestamp = new Date(splitScheduledDate[0], splitScheduledDate[1], splitScheduledDate[2])
+            console.log(isoTimestamp)
+            console.log(isoTimestamp.toISOString())
             // const res = await Api.get(`/home/testBackendCall`); // data automatically converted to json format
             // console.log(res);
 
-            setName("")
-            setAccountNumber("")
-            setAmount(0)
-            setComment("")
-            setScheduledDate(dayjs().format('YYYYMMDD'))
+            if (accountNumber.length <= 0) {
+                alert("Please enter account number.")
+            } else if (amount !== 0) {
+                alert("Please enter valid amount to be transferred.")
+            } else {
+                console.log("IM HERE")
+                setAccountNumber("")
+                setAmount(0)
+                setComment("")
+                setScheduledDate(dayjs().format('YYYY-MM-DD'))
+            }
+
+            console.log("SCHDEULED TRANSACTION DONE")
         }
         catch(err){
             console.log(err);
@@ -97,7 +104,6 @@ const NewTransactions = (props) => {
                 <form onSubmit={onSubmit}>
                     <div className="form-block__input-wrapper">
                         <div className="form-group form-group--login">
-                            <Input type="text" id="name" label="Name" value={name} onValueChange={nameHandler}/>
                             <Input type="text" id="accountNumber" label="Account ID" value={accountNumber} onValueChange={accountNumberHandler}/>
                             <Input type="number" id="amount" label="Amount" value={amount} onValueChange={amountHandler}/>
                             <Input type="text" id="comment" label="Comment" value={comment} onValueChange={commentHandler}/>
