@@ -7,9 +7,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/getTrans',(req, res) => {
-  connection.query( "SELECT * from Bank.ScheduledTransactions", function(err, data, fields){
-      if(err) return next(new AppError(err))
+app.get('/getTrans/:AccountID',(req, res) => {
+  connection.query( "SELECT * FROM Bank.ScheduledTransactions WHERE AccountID=?", 
+  [req.params.AccountID],
+  function(err, data, fields){
+      if(err) res.send(err);
       res.status(200).json({
         status: "success",
         length: data?.length,
@@ -19,11 +21,11 @@ app.get('/getTrans',(req, res) => {
 })
 
 app.post('/newTrans', (req, res, next) => {
-  if (!req.body) return next(new AppError("No form data found", 404));
+  if (!req.body) res.send("No form data found");
   connection.query( "INSERT INTO Bank.ScheduledTransactions SET ?", 
-  req.body,
+  [req.body],
   function(err, data, fields){
-      if(err) return next(new AppError(err, 500))
+      if(err) res.send(err)
       res.status(201).json({
         status: "success",
         message: "new Trans created",
@@ -31,13 +33,13 @@ app.post('/newTrans', (req, res, next) => {
   })
 })
 
-app.delete('/deleteTrans/:ID', (req, res, next) => {
+app.delete('/deleteTrans/:AccountID/:TransactionID', (req, res, next) => {
   if (!req.params.TransactionID) {console.log("No transaction found");
   }
-  connection.query( "DELETE FROM Bank.ScheduledTransactions WHERE TransactionID=?",
-  [req.params.TransactionID],
+  connection.query( "DELETE FROM Bank.ScheduledTransactions WHERE AccountID=? AND TransactionID=?",
+  [req.params.AccountID, req.params.TransactionID],
   function(err, fields){
-      if(err) return next(new AppError(err, 500))
+      if(err) res.send(err);
       res.status(201).json({
         status: "success",
         message: "Trans deleted",
