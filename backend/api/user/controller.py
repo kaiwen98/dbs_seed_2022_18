@@ -33,10 +33,10 @@ def post_create():
 
 @user_api.route("", methods=["GET"])
 def get_read() -> list[User]:
-    args = request.args
-    userID = args.get("userID")
-    res = read_one_user(userID).serialize()
+    print("GET")
+    res = read_one_user(userID=1).serialize()
     return res
+
 
 @user_api.route("/updateUser", methods=["PATCH"])
 def update_user():
