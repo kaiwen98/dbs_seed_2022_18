@@ -9,6 +9,7 @@ from flask_jwt_extended import JWTManager, get_jwt
 from api.auth.controller import auth_api
 from api.user.controller import user_api
 from api.post.controller import post_api
+from api.account.controller import account_api
 
 from api.auth import service as auth_service
 from config.db import config_db
@@ -35,5 +36,6 @@ if __name__ == "__main__":
     app.register_blueprint(auth_api, url_prefix="/auth")
     app.register_blueprint(user_api, url_prefix="/user")
     app.register_blueprint(post_api, url_prefix="/post")
+    app.register_blueprint(account_api, url_prefix="/account")
 
     app.run(port=int(os.getenv("PORT")), host=os.getenv("HOST"), debug=True)
