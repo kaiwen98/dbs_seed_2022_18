@@ -16,7 +16,7 @@ def get_login():
     payload = request.json
     user = auth_service.get_user(payload['username'])
     if user.password == payload['password']:
-        return jsonify({"code": "200", "message": {"userid":user.UserID, "username":user.username}})
+        return jsonify({"code": "200", "message": {"userid":user.userID, "username":user.username}})
     else:
         return jsonify({"code": "400", "message": "Login failed"})
         

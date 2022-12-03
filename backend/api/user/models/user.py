@@ -4,7 +4,9 @@ from config.db import db
 
 
 class User(db.Model):
-    __tablename__ ="User"
+    
+    __tablename__ = 'User'
+    
     userID = db.Column(db.String(80), primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(80))
@@ -12,7 +14,7 @@ class User(db.Model):
     lastName = db.Column(db.String(80))
     email = db.Column(db.String(80), unique=True, nullable=False)
     address = db.Column(db.String(80))
-
+    optIntoPhyStatements = db.Column(db.String(80))
 
     def __repr__(self):
         return f"<User {self.username}>"
