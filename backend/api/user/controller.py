@@ -35,8 +35,10 @@ def post_create():
 def get_read() -> list[User]:
     args = request.args
     userID = args.get("userID")
+    print(userID)
     res = read_one_user(userID).serialize()
     return res
+
 
 @user_api.route("/updateUser", methods=["PATCH"])
 def update_user():
@@ -49,16 +51,16 @@ def update_user():
         )
 
     user = update_users(
-        req["Username"],
-        req["FirstName"],
-        req["LastName"],
-        req["Email"],
-        req["Address"],
-        req["UserID"]
+        req["username"],
+        req["firstName"],
+        req["lastName"],
+        req["email"],
+        req["address"],
+        req["userID"]
     )
 
     return (
-        jsonify(success=True, data=user),
+        jsonify(success=True, data="Updated User Details Successfully"),
         status.HTTP_200_OK,
         {"Content-Type": "application/json"},
     )
