@@ -33,8 +33,10 @@ def post_create():
 
 @user_api.route("", methods=["GET"])
 def get_read() -> list[User]:
-    print("GET")
-    res = read_one_user(userID=1).serialize()
+    args = request.args
+    userID = args.get("userID")
+    print(userID)
+    res = read_one_user(userID).serialize()
     return res
 
 

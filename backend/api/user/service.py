@@ -27,17 +27,6 @@ def create_user(
 #         **kwargs
 #     ).all()
 
-def read_one_user(
-
-    userID: str 
-) -> User:
-    user = User.query.filter_by(userID = userID)
-    res = list(map(
-        lambda u: u.serialize(),
-        user
-    ))
-
-    db.session.commit()
 def read_one_user(userID):
     res =  User.query.filter_by(userID=userID).first()
     return res
