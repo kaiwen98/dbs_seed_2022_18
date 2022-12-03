@@ -1,5 +1,5 @@
 from flask import Blueprint, json, jsonify, request
-from api.user.service import read_all_user, update_user
+from api.user.service import read_all_user
 from config.db import db
 from .models.user import User
 from .service import create_user
