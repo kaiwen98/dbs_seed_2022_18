@@ -68,12 +68,17 @@ const Profile = (props) => {
         userDetails.email = email;
         console.log(userDetails);
         setUserDetails(userDetails);
+        window.location.reload();
     }
 
     const updateAddressBackend=async()=>{
         let obj = {'username':userDetails.username,'firstName':userDetails.firstName,'lastName':userDetails.lastName ,'email':email, 'address':address,'userID':userDetails.userID}
         const res = await Api.patch(`/user/updateUser`,obj); // data automatically converted to json format
         console.log(res);
+        userDetails.address = address;
+        console.log(userDetails);
+        setUserDetails(userDetails);
+        window.location.reload();
     }
 
     const buttonHandler = (type) => {
