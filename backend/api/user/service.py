@@ -42,7 +42,6 @@ def read_one_user(userID):
     res =  User.query.filter_by(userID=userID).first()
     return res
 
-    return res
 
 def read_all_user(
     **kwargs
