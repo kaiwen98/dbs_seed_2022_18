@@ -7,14 +7,16 @@ import WithNavBar from './Components/WithNavBar';
 function App() {
   return (
     <>
-      <Routes>
-        {/* All routes with navbar to be appended here */}
-        <Route element={<WithNavBar />}>
-          <Route path='/home' element={<Homepage></Homepage>}></Route>
-        </Route>
-        {/* Routes to not show navbar to be appended here */}
-        <Route path='/login' element={<Loginpage currentState='login'></Loginpage>}></Route>
-      </Routes>
+      <div className={`app app--is-login`}>
+          <Routes>
+            {/* All routes with navbar to be appended here */}
+            <Route element={<WithNavBar />}>
+              <Route path='/home' element={<Homepage></Homepage>}></Route>
+            </Route>
+            {/* Routes to not show navbar to be appended here */}
+            <Route path='/login' element={<Loginpage currentState='login'></Loginpage>}></Route>
+          </Routes>
+        </div>
     </>
   );
 }

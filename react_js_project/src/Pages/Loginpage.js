@@ -54,6 +54,7 @@ const LoginPage = (props) => {
                 console.log(loginStatus);
                 if(loginStatus.code === 400){
                     setAlertErrorMsg("Failed to login no such user exist");
+                    console.log(localStorage);
                     return setShowAlert(true);
                 }
                 else{
@@ -85,8 +86,8 @@ const LoginPage = (props) => {
         const validateLoginFunction = async (username,password) => {
         try{
             let obj = {'username':username, 'password': password}
-            const res = await Api.post(`/auth/login`,obj); // data automatically converted to json format
-            // const res = {"code":200, "message":"Login fail backend check"};
+            // const res = await Api.post(`/auth/login`,obj); // data automatically converted to json format
+            const res = {"code":200, "message":"Login fail backend check"};
             // const res = {"code":400, "message":{'id':1,"username":"timothy"}};
             console.log("RES");
             console.log(res);
@@ -133,7 +134,7 @@ const LoginPage = (props) => {
                 {showAlert && 
                     <div id="loginBackdrop" onClick={dismissAlertViaBackdrop}></div>
                 }
-                <div className={`app app--is-${state}`}>
+                {/* <div className={`app app--is-${state}`}> */}
                     <div className={`form-block-wrapper form-block-wrapper--is-${state}`} ></div>
                     <section className={`form-block form-block--is-${state}`}>
                         <header className="form-block__header">
@@ -153,7 +154,7 @@ const LoginPage = (props) => {
                             <button className="button button--primary full-width" type="submit">Login</button>
                         </form>
                     </section>
-                </div>
+                {/* </div> */}
             </div>
         
         )

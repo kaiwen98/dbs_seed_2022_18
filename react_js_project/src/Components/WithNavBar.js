@@ -5,6 +5,7 @@ import { Outlet } from 'react-router';
 const WithNavBar = () => {
   return (
     <>
+    <div className="backgroundColorDiv"></div>
     <NavbarTemplate />
     <Outlet />
   </>
