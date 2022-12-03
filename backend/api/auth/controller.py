@@ -15,7 +15,7 @@ auth_api = Blueprint("auth", __name__)
 def get_login():
     payload = request.json
     user = auth_service.get_user(payload['username'])
-    if user.password == payload['password']:
+    if user!=None and user.password == payload['password']:
         return jsonify({"code": "200", "message": {"userid":user.userID, "username":user.username}})
     else:
         return jsonify({"code": "400", "message": "Login failed"})
