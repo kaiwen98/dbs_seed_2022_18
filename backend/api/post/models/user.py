@@ -15,3 +15,5 @@ class User(db.Model):
 
     def serialize(self):
         return Serializer.serialize(self)
+
+
