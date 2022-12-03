@@ -2,6 +2,7 @@ from datetime import datetime, timedelta, timezone
 from flask import Flask
 from dotenv import load_dotenv
 import os
+from flask_cors import CORS
 
 from flask_jwt_extended import JWTManager, get_jwt
 from api.auth.controller import auth_api
@@ -16,6 +17,7 @@ if __name__ == "__main__":
 
     load_dotenv()
     app = Flask(__name__)
+    CORS(app)
     config_db(app)
     jwt = JWTManager(app)
 
