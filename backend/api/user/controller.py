@@ -31,12 +31,13 @@ def post_create():
         {"Content-Type": "application/json"},
     )
 
-@user_api.route("", methods=["GET"])
-def get_read() -> list[User]:
-    args = request.args
-    userID = args.get("userID")
-    print(userID)
-    res = read_one_user(userID).serialize()
+@user_api.route("/<id>", methods=["GET"])
+def get_read(id) -> list[User]:
+    # args = request.args
+    # userID = args.get("userID")
+    # print(userID)
+    res = read_one_user(id).serialize()
+
     return res
 
 
