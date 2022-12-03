@@ -1,5 +1,5 @@
 from flask import Blueprint, json, jsonify, request
-from api.post.service import read_all_user
+from api.user.service import read_all_user, update_user
 from config.db import db
 from .models.user import User
 from .service import create_user
@@ -33,17 +33,30 @@ def post_create():
 
 @user_api.route("", methods=["GET"])
 def get_read() -> list[User]:
+    print("GET")
     return read_all_user()
 
 
-# @user_api.route("/change_password", methods=["PUT"])
-# def change_password():
-#     req = request.get_json
+@user_api.route("/updateUser", methods=["PATCH"])
+def update_user():
+    req = request.get_json()
 
-#     if not req:
-#         return (
-#           "Invalid request!",
-#           status.HTTP_400_BAD_REQUEST
-#         )
+    if not req:
+        return (
+          "Invalid request!",
+          status.HTTP_400_BAD_REQUEST
+        )
 
-    
+    user = update_user(
+        req["Username"],
+        req["FirstName"],
+        req["LastName"],
+        req["Email"],
+        req["Address"]
+    )
+
+    return (
+        jsonify(success=True, data=user.serialize()),
+        status.HTTP_200_OK,
+        {"Content-Type": "application/json"},
+    )

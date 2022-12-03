@@ -7,16 +7,14 @@ db = SQLAlchemy()
 def config_db(app):
     global db
     print(
-        "mysql+pymysql://{}:{}@{}/{}".format(
+        "mysql+pymysql://{}:@{}/{}".format(
             os.getenv("DB_USER"),
-            os.getenv("DB_PASSWORD"),
             os.getenv("DB_HOST"),
             os.getenv("DB_NAME"),
         )
     )
-    app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://{}:{}@{}/{}".format(
+    app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://{}:@{}/{}".format(
         os.getenv("DB_USER"),
-        os.getenv("DB_PASSWORD"),
         os.getenv("DB_HOST"),
         os.getenv("DB_NAME"),
     )
