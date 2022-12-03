@@ -37,7 +37,8 @@ const NewTransactions = (props) => {
     // const sendNewTransactionBackend=async()=>{
     //     try{
     //         console.log("MAKING TEST BACKEND CALL");
-    //         const res = await Api.get(`/home/testBackendCall`); // data automatically converted to json format
+    //         let obj = {'username':username, 'password': password}
+    //         const res = await Api.post(`/auth/login`,obj); // data automatically converted to json format
     //         console.log(res);
     //     }
     //     catch(err){
@@ -102,6 +103,9 @@ const NewTransactions = (props) => {
                 alert("Please enter valid amount to be transferred.")
             } else {
                 console.log("IM HERE")
+                let obj = {'AccountID':'PLACEHOLDER', 'ReceivingAccountID': accountNumber, 'Date':scheduledDate, 'Amount':amount, 'Comment': comment}
+                const res = await Api.post(`/newTrans`, obj); // data automatically converted to json format
+                console.log(res)
                 setAccountNumber("")
                 setAmount(0)
                 setComment("")
