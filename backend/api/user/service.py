@@ -28,7 +28,6 @@ def read_one_user(
     ).all()
 
 
-
 def read_all_user(
     **kwargs
 ) -> User:

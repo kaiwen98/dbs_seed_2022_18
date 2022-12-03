@@ -36,8 +36,8 @@ def get_read() -> list[User]:
     print("GET")
     return read_all_user()
 
-    
-@user_api.route("/updateUser", methods=["PATCH"])
+        
+@user_api.route("/updateUser", methods=["GET"])
 def update_user():
     req = request.get_json()
 
