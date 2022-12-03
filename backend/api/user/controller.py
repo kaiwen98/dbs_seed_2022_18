@@ -1,5 +1,5 @@
 from flask import Blueprint, json, jsonify, request
-from api.user.service import read_all_user, read_one_user
+from api.user.service import read_all_user, read_one_user, update_user_password,update_users
 from config.db import db
 from .models.user import User
 from .service import create_user
@@ -33,9 +33,10 @@ def post_create():
 
 @user_api.route("", methods=["GET"])
 def get_read() -> list[User]:
-    print("GET")
-    return read_all_user()
-
+    args = request.args
+    userID = args.get("userID")
+    res = read_one_user(userID).serialize()
+    return res
 
 @user_api.route("/updateUser", methods=["PATCH"])
 def update_user():
@@ -57,7 +58,7 @@ def update_user():
     )
 
     return (
-        jsonify(success=True, data=user.serialize()),
+        jsonify(success=True, data=user),
         status.HTTP_200_OK,
         {"Content-Type": "application/json"},
     )
@@ -68,6 +69,8 @@ def updateUserPassword():
     UserID = req["UserID"]
     Username = req["Username"]
     Password = req["Password"]
+
+    print(req)
 
     user = update_user_password(UserID,Username,Password)
     

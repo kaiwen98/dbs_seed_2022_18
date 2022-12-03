@@ -17,7 +17,6 @@ const LoginPage = (props) => {
         const [alertErrorMsg, setAlertErrorMsg] = useState(''); //alert error message variable
         const navigate = useNavigate();
 
-        console.log("IN LOGIN PAGE");
         //Cannot set state here will cause the page to re-render infinitely resulting in an error
         //Instead, set the state at where the state value is declared
         //https://bobbyhadz.com/blog/react-too-many-re-renders-react-limits-the-number
@@ -52,7 +51,7 @@ const LoginPage = (props) => {
                 let loginStatus = await loginFunction(username,password);
                 console.log("LOGIN OBJ");
                 console.log(loginStatus);
-                if(loginStatus.code === 400){
+                if(loginStatus.data.code === '400'){
                     setAlertErrorMsg("Failed to login no such user exist");
                     console.log(localStorage);
                     return setShowAlert(true);
@@ -60,12 +59,11 @@ const LoginPage = (props) => {
                 else{
 
                     console.log("User successfully logged in");
-
                     //Login user into session
-                    localStorage.setItem("loggedInUserID",loginStatus.message.id);
-                    localStorage.setItem("loggedInUserName",loginStatus.message.username);
+                    localStorage.setItem("loggedInUserID",loginStatus.data.message.userid);
+                    localStorage.setItem("loggedInUserName",loginStatus.data.message.username);
                     console.log(localStorage);
-                    return navigate('/home');
+                    return navigate('/transaction_table_page');
                 }
             }
         }
@@ -86,18 +84,18 @@ const LoginPage = (props) => {
         const validateLoginFunction = async (username,password) => {
         try{
             let obj = {'username':username, 'password': password}
-            // const res = await Api.post(`/auth/login`,obj); // data automatically converted to json format
-            const res = {"code":200, "message":"Login fail backend check"};
+            const res = await Api.post(`/auth/login`,obj); // data automatically converted to json format
+            // const res = {"code":200, "message":"Login fail backend check"};
             // const res = {"code":400, "message":{'id':1,"username":"timothy"}};
             console.log("RES");
             console.log(res);
-            if(res.code == 400){
+            if(res.data.code == '200'){
                 console.log("Login passed backend check");
-                return {"code":200,"message":res.message};
+                return res;
             }
             else{
                 console.log("Login failed backend check");
-                return {"code":400,"message":res.message};
+                return res;
             }
         } 
             catch (err){
@@ -113,11 +111,11 @@ const LoginPage = (props) => {
         let loginValidation = await validateLoginFunction(username,password);
             if(loginValidation.code === 200){
                 console.log("Managed to successfully login");
-                return {"code":200,"message":loginValidation.message};
+                return loginValidation;
             }
             else{
                 console.log("Failed to login");
-                return {"code":400,"message":loginValidation.message};
+                return loginValidation;
             }
         }
 
@@ -140,7 +138,6 @@ const LoginPage = (props) => {
                         <header className="form-block__header">
                             <h1>Welcome back!</h1>
                             <div className="form-block__toggle-block">
-                                <span>Don't Already have an account? Click here &#8594;</span>
                                 <label htmlFor="form-toggler"></label>
                             </div>
                         </header>

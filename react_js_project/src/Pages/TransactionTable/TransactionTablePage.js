@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Card from 'react-bootstrap/Card';
@@ -24,6 +25,26 @@ const TransactionTablePage = ({
 
 }) => {
   const [selectedTab, setSelectedTab] = useState()
+  const navigate = useNavigate()
+
+  const checkIfUserIsLoggedIn =()=>{
+      let tempLoggedInUserId = localStorage.getItem("loggedInUserID");
+      if(tempLoggedInUserId){
+          console.log("Pass user auth check");
+          return true;
+      }
+      else{
+          console.log("Fail user auth check");
+          return false;
+      }
+  }
+
+  useEffect(()=>{
+    if(!checkIfUserIsLoggedIn()){
+        console.log("Failed user is login check");
+        return navigate('/login');
+    }
+  },[])
 
   const onClickSelectedTab = e => {
     e.preventDefault();

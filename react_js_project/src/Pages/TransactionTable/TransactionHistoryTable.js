@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Loader from '../../Components/Loader'
 import Tooltip from './Tooltip'
 import data from './data';
+import '../../Stylesheets/TransactionHistoryTable.scss';
 
 const TransactionHistoryTable = ({
 
 }) => {
   const [transactions, setTransactions] = useState([]) 
   const [loading, setLoading] = useState(true)
-
+  const navigate = useNavigate()
   const TransactionRow = ({
     id,
     transactionID,
@@ -29,7 +31,24 @@ const TransactionHistoryTable = ({
     </tr>
   )
 
+
+  const checkIfUserIsLoggedIn =()=>{
+      let tempLoggedInUserId = localStorage.getItem("loggedInUserID");
+      if(tempLoggedInUserId){
+          console.log("Pass user auth check");
+          return true;
+      }
+      else{
+          console.log("Fail user auth check");
+          return false;
+      }
+  }
+
   useEffect(() => {
+    if(!checkIfUserIsLoggedIn()){
+      console.log("Failed user is login check");
+      return navigate('/login');
+    }
     const filteredData = data.filter(data => new Date(data.date) <= new Date()) 
     setTransactions(
       filteredData
@@ -38,7 +57,7 @@ const TransactionHistoryTable = ({
   }, [data])
 
   return (
-    <div>
+    <div className="transactionTable">
       <h1>TransactionTable</h1>
       <table class="table table-striped table-dark">
         <thead>

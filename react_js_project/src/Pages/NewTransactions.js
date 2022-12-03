@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { useNavigate } from 'react-router-dom';
 import Api from '../Api/Api';
 import dayjs from 'dayjs';
 import { DatePicker, Space } from 'antd';
@@ -23,6 +24,7 @@ const NewTransactions = (props) => {
     const [comment, setComment] = useState("")
     const [scheduledDate, setScheduledDate] = useState(dayjs().format('YYYY-MM-DD'))
     const [validation, setValidation] = useState(false)
+    const navigate = useNavigate()
     
     // useEffect(() => {
     //     const sendNewTransaction=async()=>{
@@ -42,6 +44,25 @@ const NewTransactions = (props) => {
     //         console.log(err);
     //     }
     // }
+
+    const checkIfUserIsLoggedIn =()=>{
+        let tempLoggedInUserId = localStorage.getItem("loggedInUserID");
+        if(tempLoggedInUserId){
+            console.log("Pass user auth check");
+            return true;
+        }
+        else{
+            console.log("Fail user auth check");
+            return false;
+        }
+    }
+
+    useEffect(()=>{
+        if(!checkIfUserIsLoggedIn()){
+            console.log("Failed user is login check");
+            return navigate('/login');
+        }
+      },[])
 
     const accountNumberHandler = (event) => {
         setAccountNumber(event.target.value)
