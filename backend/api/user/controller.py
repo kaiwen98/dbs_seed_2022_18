@@ -1,9 +1,5 @@
 from flask import Blueprint, json, jsonify, request
-<<<<<<< HEAD
-from api.user.service import read_all_user, read_one_user, update_users
-=======
-from api.user.service import read_all_user, read_one_user, update_user_password
->>>>>>> b2c7a4b78a68cacea6c25efe1ec7d80ad6c36fe6
+from api.user.service import read_all_user, read_one_user
 from config.db import db
 from .models.user import User
 from .service import create_user
