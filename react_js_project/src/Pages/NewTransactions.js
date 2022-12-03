@@ -2,7 +2,9 @@ import React, {useState, useEffect} from "react";
 import Api from '../Api/Api';
 import dayjs from 'dayjs';
 import { DatePicker, Space } from 'antd';
-import "../Stylesheets/NewTransactions.css"
+import "../Stylesheets/NewTransactions.scss"
+import '../Stylesheets/Loginpage.scss'
+import Input from '../Components/Input';
 
 const DUMMY_DATA = [
     {
@@ -19,29 +21,27 @@ const NewTransactions = (props) => {
     const [name, setName] = useState("")
     const [accountNumber, setAccountNumber] = useState("")
     const [amount, setAmount] = useState(0)
-    const [scheduledDate, setScheduledDate] = useState(dayjs())
+    const [comment, setComment] = useState("")
+    const [scheduledDate, setScheduledDate] = useState(dayjs().format('YYYYMMDD'))
     
-
     // useEffect(() => {
-    //     // const setUpPageData=async()=>{
-    //     //   console.log("in setUpPageData");
-    //     //   await testBackendCall();
-    //     // }
-    //     // setUpPageData();
-
-    //     // setStartDate(new Date())
+    //     const sendNewTransaction=async()=>{
+    //       console.log("in setUpPageData");
+    //       await sendNewTransactionBackend();
+    //     }
+    //     sendNewTransaction();
     //   },[])
     
-    const testBackendCall=async()=>{
-        try{
-            console.log("MAKING TEST BACKEND CALL");
-            const res = await Api.get(`/home/testBackendCall`); // data automatically converted to json format
-            console.log(res);
-        }
-        catch(err){
-            console.log(err);
-        }
-    }
+    // const sendNewTransactionBackend=async()=>{
+    //     try{
+    //         console.log("MAKING TEST BACKEND CALL");
+    //         const res = await Api.get(`/home/testBackendCall`); // data automatically converted to json format
+    //         console.log(res);
+    //     }
+    //     catch(err){
+    //         console.log(err);
+    //     }
+    // }
 
     const nameHandler = (event) => {
         setName(event.target.value)
@@ -55,40 +55,61 @@ const NewTransactions = (props) => {
         setAmount(event.target.value)
     }
 
-    const scheduledDateHandler = (event) => {
-        console.log(event)
-        // setScheduledDate(event.target.value)
+    const commentHandler = (event) => {
+        setComment(event.target.value)
     }
 
-    const onChange = (date, dateString) => {
+    const scheduledDateHandler = (date, dateString) => {
         console.log(date, dateString);
+        setScheduledDate(dateString)
       };
 
+    const onSubmit = async(e) =>{
+        e.preventDefault();
+        try{
+            console.log("MAKING TEST BACKEND CALL");
+            console.log(name)
+            console.log(accountNumber)
+            console.log(amount)
+            console.log(comment)
+            console.log(scheduledDate)
+            // const res = await Api.get(`/home/testBackendCall`); // data automatically converted to json format
+            // console.log(res);
+
+            setName("")
+            setAccountNumber("")
+            setAmount(0)
+            setComment("")
+            setScheduledDate(dayjs().format('YYYYMMDD'))
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
     
     return (
-        <div className="NewTransactions-Container">
-            <form className=".NewTransactions-Form">
-                <label>
-                    Name:
-                    <input type="text" name="name" value={name} onChange={(e) => nameHandler(e)}/>
-                </label>
-                <label>
-                    Account Number:
-                    <input type="text" name="accountNumber" value={accountNumber} onChange={(e) => accountNumberHandler(e)}/>
-                </label>
-                <label>
-                    Amount: 
-                    <input type="text" name="amount" value={amount} onChange={(e) => amountHandler(e)}/>
-                </label>
-                {/* <label>
-                    Scheduled Date:
-                    <input type="text" name="scheduledDate" value={scheduledDate} onChange={(e) => setScheduledDate(e)}/>
-                </label> */}
-                <DatePicker defaultValue={dayjs()} format={dateFormat} onChange={onChange}/>
-                <input type="submit" value="Submit" />
-            </form>
+        <div className={`app app--is-login`}>
+            <div className="form-block-wrapper form-block-wrapper--is-login"></div>
+            <section className="form-block transaction-form-block">
+                <header className="form-block__header">
+                    <h1>New Transaction Form</h1>
+                </header>
+                <form onSubmit={onSubmit}>
+                    <div className="form-block__input-wrapper">
+                        <div className="form-group form-group--login">
+                            <Input type="text" id="name" label="Name" value={name} onValueChange={nameHandler}/>
+                            <Input type="text" id="accountNumber" label="Account ID" value={accountNumber} onValueChange={accountNumberHandler}/>
+                            <Input type="number" id="amount" label="Amount" value={amount} onValueChange={amountHandler}/>
+                            <Input type="text" id="comment" label="Comment" value={comment} onValueChange={commentHandler}/>
+                            <DatePicker defaultValue={dayjs()} format={dateFormat} onChange={scheduledDateHandler} style={{height: '100px', width: '200px'}}/>
+                        </div>
+                    </div>
+                    <button className="button button--primary full-width" type="submit">Schedule New Transaction</button>
+                </form>
+            </section>
         </div>
     );
+
 };
 
 export default NewTransactions;
