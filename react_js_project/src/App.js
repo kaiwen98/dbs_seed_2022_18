@@ -1,10 +1,10 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Homepage from './Pages/Homepage';
 import TransactionHistoryTable from './Pages/TransactionTable/TransactionHistoryTable';
 import TransactionTablePage from './Pages/TransactionTable/TransactionTablePage';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import NewTransactions from "./Pages/NewTransactions";
 import Loginpage from './Pages/Loginpage';
 import WithNavBar from './Components/WithNavBar';
-
 
 function App() {
   return (
@@ -19,6 +19,10 @@ function App() {
         </Route>
         {/* Routes to not show navbar to be appended here */}
         <Route path='/login' element={<Loginpage currentState='login'></Loginpage>}></Route>
+        <Route
+          path="/newTrans"
+          element={<NewTransactions/>}
+        ></Route>
       </Routes>
     </>
   );
