@@ -73,8 +73,5 @@ def register_user(
     return user
 
 def get_user(username):
-    print("getting user...", username)
-    print("\n"*2)
     res =  User.query.filter_by(username=username).first()
-    print(res.userID)
     return res
