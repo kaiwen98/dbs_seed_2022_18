@@ -1,5 +1,5 @@
 import express from 'express';
-import { newTransaction, getTransactions, deleteTransaction } from '../controllers/sched_trans';
+import { newTransaction, getTransactions, deleteTransaction } from '../controllers/sched_trans.js';
 
 const router = express.Router();
 
