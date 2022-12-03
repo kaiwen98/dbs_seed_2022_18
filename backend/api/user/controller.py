@@ -34,3 +34,16 @@ def post_create():
 @user_api.route("", methods=["GET"])
 def get_read() -> list[User]:
     return read_all_user()
+
+
+# @user_api.route("/change_password", methods=["PUT"])
+# def change_password():
+#     req = request.get_json
+
+#     if not req:
+#         return (
+#           "Invalid request!",
+#           status.HTTP_400_BAD_REQUEST
+#         )
+
+    
