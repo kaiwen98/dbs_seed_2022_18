@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Loader from '../../components/Loader'
+import Loader from '../../Components/Loader'
 import Tooltip from './Tooltip'
 import data from './data';
 

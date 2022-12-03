@@ -48,6 +48,11 @@ const NavbarTemplate = (props) => {
             <Nav.Link as={Link} to={`/`}>Home</Nav.Link>
             <Nav.Link as={Link} to={`/login`}>Login</Nav.Link>
             <Nav.Link as={Link} to={`/account_details`}>Account Details</Nav.Link>
+            <NavDropdown title="Currency Hackathon" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to={`/newTrans`}>New Transaction</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to={`/transaction_table`}>Transaction History Table</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to={`/transaction_table_page`}>Transaction Table</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
         <Navbar.Toggle />

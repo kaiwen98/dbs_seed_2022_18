@@ -95,25 +95,22 @@ const NewTransactions = (props) => {
     }
     
     return (
-        <div className={`app app--is-login`}>
-            <div className="form-block-wrapper form-block-wrapper--is-login"></div>
-            <section className="form-block transaction-form-block">
-                <header className="form-block__header">
-                    <h1>New Transaction Form</h1>
-                </header>
-                <form onSubmit={onSubmit}>
-                    <div className="form-block__input-wrapper">
-                        <div className="form-group form-group--login">
-                            <Input type="text" id="accountNumber" label="Account ID" value={accountNumber} onValueChange={accountNumberHandler}/>
-                            <Input type="number" id="amount" label="Amount" value={amount} onValueChange={amountHandler}/>
-                            <Input type="text" id="comment" label="Comment" value={comment} onValueChange={commentHandler}/>
-                            <DatePicker defaultValue={dayjs()} format={dateFormat} onChange={scheduledDateHandler} style={{height: '100px', width: '200px'}}/>
-                        </div>
+        <section className="form-block transaction-form-block">
+            <header className="form-block__header">
+                <h1>New Transaction Form</h1>
+            </header>
+            <form onSubmit={onSubmit}>
+                <div className="form-block__input-wrapper">
+                    <div className="form-group form-group--login">
+                        <Input type="text" id="accountNumber" label="Account ID" value={accountNumber} onValueChange={accountNumberHandler}/>
+                        <Input type="number" id="amount" label="Amount" value={amount} onValueChange={amountHandler}/>
+                        <Input type="text" id="comment" label="Comment" value={comment} onValueChange={commentHandler}/>
+                        <DatePicker defaultValue={dayjs()} format={dateFormat} onChange={scheduledDateHandler} style={{height: '100px', width: '200px'}}/>
                     </div>
-                    <button className="button button--primary full-width" type="submit">Schedule New Transaction</button>
-                </form>
-            </section>
-        </div>
+                </div>
+                <button className="button button--primary full-width" type="submit">Schedule New Transaction</button>
+            </form>
+        </section>
     );
 
 };
