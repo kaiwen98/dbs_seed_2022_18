@@ -50,8 +50,11 @@ def login_user(
 
 def register_user(
     username,
+    firstname,
+    lastname,
     password,
     email,
+    address
 ) -> User:
     id = uuid.uuid4().__str__()
     password_salt = bcrypt.gensalt()
@@ -59,9 +62,11 @@ def register_user(
 
     user = user_service.create_user(
         username=username,
-        password_salt=password_salt.decode('utf-8'),
-        password_hash=password_hash.decode('utf-8'),
+        firstname = firstname,
+        lastname = lastname,
+        password=password_hash.decode('utf-8'),
         email=email,
+        address=address,
         id=id
     )
 

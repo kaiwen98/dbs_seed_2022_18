@@ -4,11 +4,14 @@ from config.db import db
 
 
 class User(db.Model):
-    id = db.Column(db.String(80), primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password_salt = db.Column(db.String(80))
-    password_hash = db.Column(db.String(80))
-    email = db.Column(db.String(80), unique=True, nullable=False)
+    UserID = db.Column(db.String(80), primary_key=True)
+    Username = db.Column(db.String(80), unique=True, nullable=False)
+    Password = db.Column(db.String(80))
+    FirstName = db.Column(db.String(80))
+    LastName = db.Column(db.String(80))
+    Email = db.Column(db.String(80), unique=True, nullable=False)
+    Address = db.Column(db.String(80))
+
 
     def __repr__(self):
         return f"<User {self.username}>"
@@ -18,6 +21,5 @@ class User(db.Model):
 
     def serialize_public(self):
         temp = Serializer.serialize(self)
-        del temp["password_hash"]
-        del temp["password_salt"]
+        del temp["Password"]
         return temp
