@@ -72,9 +72,9 @@ def update_users(
 
 def update_user_password(
 
-    UserID: str , username: str, password: str
+    userID: str , username: str, password: str
 ) -> User:
-    user = User.query.filter_by(UserID = 1)
+    user = User.query.filter_by(userID = userID)
 
     user.update({"password":password})
 
@@ -90,5 +90,5 @@ def update_user_password(
     # )
     # db.session.add(user)
     # db.session.commit()
-
+    print(res)
     return res
