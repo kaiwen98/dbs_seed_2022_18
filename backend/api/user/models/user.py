@@ -5,7 +5,7 @@ from config.db import db
 
 class User(db.Model):
     UserID = db.Column(db.String(80), primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
+    Username = db.Column(db.String(80), unique=True, nullable=False)
     Password = db.Column(db.String(80))
     FirstName = db.Column(db.String(80))
     LastName = db.Column(db.String(80))

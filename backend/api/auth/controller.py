@@ -23,13 +23,20 @@ def post_register():
             status.HTTP_400_BAD_REQUEST
         )
     username = req_body.get("username", None)
+    firstname = req_body.get("firstname", None)
+    lastname = req_body.get("lastname", None)
     password = req_body.get("password", None)
     email = req_body.get("email", None)
+    address = req_body.get("address", None)
 
     user = auth_service.register_user(
         username,
+        firstname,
+        lastname,
         password,
-        email
+        email,
+        address
+
     )
 
     return (
