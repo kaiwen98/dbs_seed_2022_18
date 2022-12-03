@@ -60,3 +60,9 @@ def update_user():
         status.HTTP_200_OK,
         {"Content-Type": "application/json"},
     )
+
+@user_api.route("/updateUserPassword", methods=["PATCH"])
+def update_user_password():
+    req = request.get_json()
+    tes = read_all_user(username="SeederDBS")
+    print(req)
