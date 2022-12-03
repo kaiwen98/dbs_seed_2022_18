@@ -10,8 +10,8 @@ class User(db.Model):
     UserID = db.Column(db.String(80), primary_key=True)
     Username = db.Column(db.String(80), unique=True, nullable=False)
     Password = db.Column(db.String(80))
-    FirstName = db.Column(db.String(80))
-    LastName = db.Column(db.String(80))
+    Firstname = db.Column(db.String(80))
+    Lastname = db.Column(db.String(80))
     Email = db.Column(db.String(80), unique=True, nullable=False)
     Address = db.Column(db.String(80))
 
