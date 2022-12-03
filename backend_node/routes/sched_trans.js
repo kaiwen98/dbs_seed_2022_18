@@ -1,5 +1,5 @@
-import express from 'express';
-import { newTransaction, getTransactions, deleteTransaction } from '../controllers/sched_trans.js';
+const express = require('express');
+const { newTransaction, getTransactions, deleteTransaction } = require('../controllers/sched_trans.js');
 
 const router = express.Router();
 
@@ -12,4 +12,4 @@ router.post('/', newTransaction);
 // Delete transaction from database
 router.delete('/:transationId', deleteTransaction);
 
-export default router;
+module.exports = transRouter;

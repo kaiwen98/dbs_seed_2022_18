@@ -1,24 +1,29 @@
-import mysql from "../db/connection.js";
+var {getConnection} = require('../db/connection.js');
 
 let transactions = [];
-export const newTransaction = (req,res) => {
+
+const dbConnection = getConnection;
+
+const newTransaction = (req,res) => {
     const transaction = req.body;
     transactions.push(transctions);
     res.send(transaction);
 }
-export const getTransactions = (req, res) => {
-    console.log('test get')
-    const transactions = connection.query( 'select * from Bank.ScheduledTransactions', function(error, results){
+
+const getTransactions = (req, res) => {
+    // console.log("CONN: ", dbConnection)
+    transactions = dbConnection.query( 'select * from Bank.ScheduledTransactions', function(error, results){
         if (results) {
             res.send(transactions)
         } else {
             console.log(error);
         }
     })
-    
 }
 
-export const deleteTransaction = (req, res) => {
+const deleteTransaction = (req, res) => {
     const { accountId } = req.params;
     transactions = transactions.filter((transaction) => transaction.accountId != accountId);
 }
+
+module.export = {newTransaction, getTransactions, deleteTransaction};

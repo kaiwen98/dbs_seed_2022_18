@@ -1,4 +1,4 @@
-import {Schema, model} from "../db/connection.js";
+const {Schema, model} =  require('../db/connection.js');
 
 const transSchema = new Schema( {
     transactionId: {
