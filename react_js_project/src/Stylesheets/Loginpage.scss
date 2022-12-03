@@ -139,6 +139,10 @@ html, body, .container, #app {
         height: 4 * $inputHeight;
         @include transition(all .5s $transitionEasing .2s);
     }
+    .transaction-form-block & {
+        height: 6 * $inputHeight;
+        @include transition(all .5s $transitionEasing .2s);
+    }
 }
 
 .form-group {
