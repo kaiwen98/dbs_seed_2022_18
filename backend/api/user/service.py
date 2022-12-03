@@ -20,12 +20,9 @@ def create_user(
     db.session.commit()
     return user
 
-def read_one_user(
-    **kwargs
-) -> User:
-    return User.query.filter_by(
-        **kwargs
-    ).all()
+def read_one_user(userID):
+    res =  User.query.filter_by(userID=userID).first()
+    return res
 
 def read_all_user(
     **kwargs
