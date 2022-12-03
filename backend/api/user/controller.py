@@ -56,7 +56,7 @@ def update_user():
     )
 
     return (
-        jsonify(success=True, data=user),
+        jsonify(success=True, data="Updated User Details Successfully"),
         status.HTTP_200_OK,
         {"Content-Type": "application/json"},
     )
