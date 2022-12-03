@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta, timezone
 from flask import Flask
+from flask_cors import CORS, cross_origin
 from dotenv import load_dotenv
 import os
 
@@ -16,6 +17,8 @@ if __name__ == "__main__":
 
     load_dotenv()
     app = Flask(__name__)
+    cors = CORS(app)
+    app.config['CORS_HEADERS'] = 'Content-Type'
     config_db(app)
     jwt = JWTManager(app)
 

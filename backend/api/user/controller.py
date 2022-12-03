@@ -41,6 +41,10 @@ def get_read() -> list[User]:
 
         
 @user_api.route("/updateUser", methods=["PATCH"])
+    res = read_one_user(userID=1).serialize()
+    return res
+
+@user_api.route("/updateUser", methods=["PATCH"])
 def update_user():
     req = request.get_json()
 

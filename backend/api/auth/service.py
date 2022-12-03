@@ -74,4 +74,6 @@ def register_user(
 
 def get_user(username):
     res =  User.query.filter_by(username=username).first()
+    print(res)
+    print("\n"*3)
     return res
