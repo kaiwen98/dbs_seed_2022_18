@@ -5,6 +5,7 @@ const cors = require("cors");
 const connection = require('./db/connection');
 // import trans from "../models/sched_trans";
 
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -33,6 +34,20 @@ app.post('/newTrans', (req, res, next) => {
       res.status(201).json({
         status: "success",
         message: "new Trans created",
+      });
+  })
+})
+
+app.delete('/deleteTrans/:ID', (req, res, next) => {
+  if (!req.params.TransactionID) {console.log("No transaction found");
+  }
+  connection.query( "DELETE FROM Bank.ScheduledTransactions WHERE TransactionID=?",
+  [req.params.TransactionID],
+  function(err, fields){
+      if(err) return next(new AppError(err, 500))
+      res.status(201).json({
+        status: "success",
+        message: "Trans deleted",
       });
   })
 })
