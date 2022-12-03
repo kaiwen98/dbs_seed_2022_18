@@ -62,7 +62,7 @@ const LoginPage = (props) => {
 
                     //Login user into session
                     localStorage.setItem("loggedInUserID",loginStatus.message.id);
-                    localStorage.setItem("loggedInUserName",loginStatus.message.id);
+                    localStorage.setItem("loggedInUserName",loginStatus.message.username);
                     console.log(localStorage);
                     return navigate('/home');
                 }
@@ -84,9 +84,10 @@ const LoginPage = (props) => {
         // Backend, Validate user login information 
         const validateLoginFunction = async (username,password) => {
         try{
-            // const res = await Api.get(`/login/${username}/${password}`); // data automatically converted to json format
+            let obj = {'username':username, 'password': password}
+            const res = await Api.post(`/auth/login`,obj); // data automatically converted to json format
             // const res = {"code":200, "message":"Login fail backend check"};
-            const res = {"code":400, "message":{'id':1,"username":"timothy"}};
+            // const res = {"code":400, "message":{'id':1,"username":"timothy"}};
             console.log("RES");
             console.log(res);
             if(res.code == 400){
