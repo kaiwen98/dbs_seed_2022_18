@@ -6,6 +6,7 @@ import '../Stylesheets/Loginpage.scss'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useNavigate } from 'react-router-dom';
 
 
 const DUMMY_DATA = [
@@ -23,6 +24,36 @@ const Profile = (props) => {
     const [modalType, setModalType] = useState(false);
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
+    const navigate = useNavigate();
+
+    const checkIfUserIsLoggedIn =()=>{
+        let tempLoggedInUserId = localStorage.getItem("loggedInUserID");
+        if(tempLoggedInUserId){
+            console.log("Pass user auth check");
+            return true;
+        }
+        else{
+            console.log("Fail user auth check");
+            return false;
+        }
+    }
+
+    useEffect(()=>{
+        const setUpProfilePage=async()=>{
+            if(!checkIfUserIsLoggedIn()){
+                console.log("Failed user is login check");
+                return navigate('/login');
+            }
+
+            let tempLoggedInUserId = localStorage.getItem("loggedInUserID");
+            console.log(tempLoggedInUserId);
+            const res = await Api.get(`/user/${tempLoggedInUserId}`); // data automatically converted to json format
+            console.log(res);
+            console.log("TEST");
+        }
+
+        setUpProfilePage();
+    })
 
     const buttonHandler = (type) => {
         switch(type) {
