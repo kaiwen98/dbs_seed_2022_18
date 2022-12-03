@@ -67,12 +67,18 @@ def updateUserPassword():
     UserID = req["UserID"]
     Username = req["Username"]
     Password = req["Password"]
-    print(UserID,Username,Password)
 
-    test = update_user_password(UserID,Username,Password)
+    user = update_user_password(UserID,Username,Password)
     
-    print("-")
-    print(test)
-    print("-")
+    if not req:
+        return (
+          "Invalid request!",
+          status.HTTP_400_BAD_REQUEST
+        )
 
-    return "10"
+    if user[0]["password"] == Password:
+        return (
+            jsonify(success=True, data="Updated"),
+            status.HTTP_200_OK,
+            {"Content-Type": "application/json"},
+        )
